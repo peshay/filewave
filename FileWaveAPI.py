@@ -9,7 +9,8 @@ For Authentication, you need the Shared Key from FileWave.
 You can get it from
     FileWave Admin - Preferences - Inventory - Inventory Server - Shared Key
 If there is no shared key in this section,
-check the Generate new key on Save option and select Ok in the preference dialog.
+check the Generate new key on Save option
+and select Ok in the preference dialog.
 If there is a shared key, do NOT select to generate a new key on save.
 
 Python2/Python3 compatibility notes:
@@ -70,7 +71,7 @@ More information about the FileWave Restful API can be found at https://www.file
 :license: The MIT License (MIT), see LICENSE for more details.
 """
 
-__version__ = "0.1"
+__version__ = "0.3"
 
 import base64
 import logging
@@ -134,6 +135,16 @@ class api(object):
         """Send a DELETE request to the server."""
         return self.Request(URL, 'delete', data)
 
+    def OutputToCSV(self, fields, data, OUTFILE):
+        """To write output data to a CSV file."""
+        import csv
+        csvfile = open(OUTFILE, 'w')
+        csvwriter = csv.writer(csvfile, delimiter=',',
+                               quotechar='"', quoting=csv.QUOTE_MINIMAL)
+        csvwriter.writerow(fields)
+        for line in data:
+            csvwriter.writerow(line)
+
 
 class v1(api):
     """API v1 based class."""
@@ -141,6 +152,26 @@ class v1(api):
         super(v1, self).__init__(SHARED_SECRET, SERVER_NAME, SERVER_PORT)
 
     """From now on, Functions that only work with API v1."""
+    def ListComponents(self):
+        """List available Components from API."""
+        URL = "/inv/api/v1/component/"
+        return self.GetRequest(URL)
+
+    def ListLicenseDefinition(self):
+        """List available License Definitions."""
+        URL = "/inv/api/v1/license_definition/"
+        return self.GetRequest(URL)
+
+    def ListLicense(self, id):
+        """List available License Information."""
+        URL = "/inv/api/v1/license_definition/{0}".format(id)
+        return self.GetRequest(URL)
+
+    def QueryLicense(self, id):
+        """Show Query result of a license."""
+        query = self.ListLicense(id).get("query")
+        return self.PostNewQuery(query)
+
     def ViewAllQueries(self):
         """Viewing all available queries."""
         URL = "/inv/api/v1/query/"
@@ -165,3 +196,23 @@ class v1(api):
         """Removing a query."""
         URL = "/inv/api/v1/query/{0}".format(id)
         return self.GetRequest(URL)
+
+    # functions from old API examples
+    def ListComponentsCSV(self, OUTFILE):
+        """Output ListComponents in CSV style."""
+        data = self.ListComponents()
+        fields = ['component_display_name', 'component_description',
+                  'component_name', 'field_display_name', 'field_description',
+                  'field_name', 'field_type']
+        newdata = []
+        for type in data:
+            currenttype = data[type]
+            desc = currenttype['description']
+            dispname = currenttype['display_name']
+            mainname = type
+            for field in currenttype['fields']:
+                if 'description' in field:
+                    newdata.append([dispname, desc, mainname,
+                                   field['display_name'], field['description'],
+                                   field['column'], field['type']])
+        self.OutputToCSV(fields, newdata, OUTFILE)

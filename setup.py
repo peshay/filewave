@@ -2,7 +2,7 @@
 """Setup to install FileWaveAPI Python Module."""
 from distutils.core import setup
 setup(name='FileWaveAPI',
-      version='0.1',
+      version='0.3',
       py_modules=['FileWaveAPI'],
       install_requires=['requests', 'base64', 'json'],
       description='Provides functions to work with FileWave Restful API.',
