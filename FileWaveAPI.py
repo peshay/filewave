@@ -13,16 +13,6 @@ check the Generate new key on Save option
 and select Ok in the preference dialog.
 If there is a shared key, do NOT select to generate a new key on save.
 
-Python2/Python3 compatibility notes:
-
-The module is written to be fully compatible with Python2 and Python3.
-If you use the key as binary object like this
-    SHARED_SECRET = b"{c4397402-3021-4697-ae01-bf86b94105b1}"
-your code will work with Python2 and Python3.
-If you use it just as string like this
-    SHARED_SECRET = "{c4397402-3021-4697-ae01-bf86b94105b1}"
-it will only work with Python2.
-
 Logging:
 The module also provides logging for debug messages.
     >>> import logging
@@ -38,7 +28,7 @@ If you don't want the requests and urllib3 module to log too much
 Usage Example:
 Import the module and provide all necessary information for an API connection.
     >>> import FileWaveAPI
-    >>> SHARED_SECRET = b"{c4397402-3021-4697-ae01-bf86b94105b1}"
+    >>> SHARED_SECRET = "{c4397402-3021-4697-ae01-bf86b94105b1}"
     >>> SERVER_NAME = "filewave-server.example.com"
     >>> SERVER_PORT = "20443"
     >>> f = FileWaveAPI.v1(SHARED_SECRET, SERVER_NAME, SERVER_PORT)
@@ -77,6 +67,8 @@ import base64
 import logging
 import requests
 import json
+# For python2 backwards compatibility
+from builtins import bytes
 # to disable warnings about self-signed certs
 requests.packages.urllib3.disable_warnings()
 
@@ -89,10 +81,10 @@ class api(object):
     def __init__(self, SHARED_SECRET, SERVER_NAME, SERVER_PORT):
         """Provide action, when object gets created."""
         # Encode SHARED_SECRET with base64
-        self.SHARED_SECRET = SHARED_SECRET
+        self.SHARED_SECRET = bytes(SHARED_SECRET, 'utf-8')
         self.SERVER_NAME = SERVER_NAME
         self.SERVER_PORT = SERVER_PORT
-        E_STRING = base64.encodestring(SHARED_SECRET)
+        E_STRING = base64.encodestring(self.SHARED_SECRET)
         if not isinstance(E_STRING, str):
             self.SHARED_SECRET_ENCODED = E_STRING.decode('ascii').rstrip()
         else:
