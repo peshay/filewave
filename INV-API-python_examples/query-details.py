@@ -1,7 +1,7 @@
 #! /usr/bin/env python
 # list the details of a given query
 # server details can either be defined in here, or passed as parameters
-SHARED_SECRET = b"{c4397402-3021-4697-ae01-bf86b94105b1}"
+SHARED_SECRET = "{c4397402-3021-4697-ae01-bf86b94105b1}"
 SERVER_NAME = "demo.filewave.ch"
 SERVER_PORT = "20443"
 
