@@ -1,4 +1,4 @@
-#! /usr/bin/env python
+#! /usr/bin/env python3
 # list all query components
 # server details can either be defined in here, or passed as parameters
 SHARED_SECRET = "{c4397402-3021-4697-ae01-bf86b94105b1}"
