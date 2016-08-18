@@ -14,18 +14,24 @@ You can install the FileWaveAPI module via pip
 
 ### Authentication
 For Authentication, you need the Shared Key from FileWave.
+
 You can get it from
+
     FileWave Admin - Preferences - Inventory - Inventory Server - Shared Key
-If there is no shared key in this section,
-check the Generate new key on Save option and select Ok in the preference dialog.
+    
+If there is no shared key in this section, check the Generate new key on Save option and select Ok in the preference dialog.
 If there is a shared key, do NOT select to generate a new key on save.
 
 ### Python2/Python3 compatibility notes
 The module is written to be fully compatible with Python2 and Python3.
+
 If you use the key as binary object like this
+
     SHARED_SECRET = b"{c4397402-3021-4697-ae01-bf86b94105b1}"
 your code will work with Python2 and Python3.
+
 If you use it just as string like this
+
     SHARED_SECRET = "{c4397402-3021-4697-ae01-bf86b94105b1}"
 it will only work with Python2.
 
