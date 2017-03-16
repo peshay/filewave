@@ -95,3 +95,8 @@ Delete a query.
 ```
 
 More information about the FileWave Restful API can be found at https://www.filewave.com/item/restful-api
+
+## Support on Beerpay
+Hey dude! Help me out for a couple of :beers:!
+
+[![Beerpay](https://beerpay.io/peshay/filewave/badge.svg?style=beer-square)](https://beerpay.io/peshay/filewave)  [![Beerpay](https://beerpay.io/peshay/filewave/make-wish.svg?style=flat-square)](https://beerpay.io/peshay/filewave?focus=wish)
