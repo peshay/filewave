@@ -2,7 +2,7 @@
 [![GitHub release](https://img.shields.io/github/release/peshay/filewave.svg)]()
 [![GitHub tag](https://img.shields.io/github/tag/peshay/filewave.svg)]()
 [![license](https://img.shields.io/github/license/peshay/filewave.svg)]()
-[![Beerpay](https://img.shields.io/beerpay/peshay/filewave.svg)]()
+[![Beerpay](https://beerpay.io/peshay/filewave/badge.svg?style=beer)](https://beerpay.io/peshay/filewave)
 
 # FileWaveAPI.py
 
