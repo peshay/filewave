@@ -1,3 +1,8 @@
+[![Build Status](https://travis-ci.org/peshay/filewave.svg?branch=testcase)](https://travis-ci.org/peshay/filewave)
+[![GitHub release](https://img.shields.io/github/release/peshay/filewave.svg)]()
+[![GitHub tag](https://img.shields.io/github/tag/peshay/filewave.svg)]()
+[![license](https://img.shields.io/github/license/peshay/filewave.svg)]()
+
 # FileWaveAPI.py
 
 To simplify usage of [FileWave](https://www.filewave.com) API.
@@ -18,7 +23,7 @@ For Authentication, you need the Shared Key from FileWave.
 You can get it from
 
     FileWave Admin - Preferences - Inventory - Inventory Server - Shared Key
-    
+
 If there is no shared key in this section, check the Generate new key on Save option and select Ok in the preference dialog.
 If there is a shared key, do NOT select to generate a new key on save.
 
